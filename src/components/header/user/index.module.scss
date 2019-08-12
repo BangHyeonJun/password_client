@@ -1,0 +1,18 @@
+.profile-box {
+    width: 56px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &:hover {
+        background-color: rgba(#000, 0.1);
+        border-radius: 100px;
+    }
+}
+
+.profile {
+    width: 42px;
+    height: 42px;
+    border-radius: 50px;
+}

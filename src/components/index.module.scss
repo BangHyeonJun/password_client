@@ -1,0 +1,24 @@
+@import "./common/sass/mobile.scss";
+
+.container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+// .router-box {
+//     width: 70%;
+//     background-color: rgba(#fff, 1);
+//     box-shadow: 0px 0px 5px 1px rgba(#000, 0.3);
+
+//     @media screen and (max-width: $tablet-max-width) {
+//         width: 80%;
+//         justify-content: space-between;
+//     }
+
+//     @media screen and (max-width: $mobile-max-width) {
+//         width: 100%;
+//         justify-content: center;
+//     }
+// }

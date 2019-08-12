@@ -1,0 +1,14 @@
+@import "./index.scss";
+
+.post-another-container {
+    width: 250px;
+
+    @media screen and (max-width: $post-tablet-max-width) {
+        width: 100%;
+    }
+
+    /* 테두리 */
+    .post-card {
+        @include post-card();
+    }
+}

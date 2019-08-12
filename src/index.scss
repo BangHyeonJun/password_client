@@ -1,0 +1,79 @@
+html,
+body {
+    margin: 0;
+    overflow: hidden;
+    // background-color: rgba(#00a8ff, 0.5);
+    // background-image: repeating-linear-gradient(
+    //     rgba(#dfdfdf, 0.3),
+    //     rgba(#00a8ff, 0.3)
+    // );
+}
+
+/* 폰트 */
+@font-face {
+    font-family: "NSBL";
+    src: url("./static/fonts/NotoSansKR-Black.otf");
+}
+
+@font-face {
+    font-family: "NSB";
+    src: url("./static/fonts/NotoSansKR-Bold.otf");
+}
+
+@font-face {
+    font-family: "NSM";
+    src: url("./static/fonts/NotoSansKR-Medium.otf");
+}
+
+@font-face {
+    font-family: "NSR";
+    src: url("./static/fonts/NotoSansKR-Regular.otf");
+}
+
+@font-face {
+    font-family: "NSL";
+    src: url("./static/fonts/NotoSansKR-Light.otf");
+}
+
+@font-face {
+    font-family: "NST";
+    src: url("./static/fonts/NotoSansKR-Thin.otf");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin: 0;
+}
+
+h1 {
+    font-family: "NSBL";
+}
+
+h2 {
+    font-family: "NSB";
+}
+
+h3 {
+    font-family: "NSM";
+}
+
+h4 {
+    font-family: "NSR";
+}
+
+h5 {
+    font-family: "NSL";
+}
+
+h6 {
+    font-family: "NST";
+}
+
+/* 공통 */
+p {
+    margin: 0;
+}
