@@ -29,7 +29,7 @@ import { createUploadLink } from "apollo-upload-client";
 // });
 
 const httpLink = createUploadLink({
-    uri: "http://localhost:4000/blog",
+    uri: "http://localhost:4000/password",
     credentials: "same-origin"
 });
 

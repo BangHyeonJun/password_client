@@ -1,0 +1,162 @@
+@keyframes showModal {
+    0% {
+        height: 0px;
+    }
+
+    100% {
+        height: 100%;
+    }
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(#000, 0.5);
+    z-index: 999;
+    justify-content: center;
+    align-items: center;
+
+    animation-duration: 0.2s;
+    animation-name: showModal;
+    animation-fill-mode: both;
+}
+
+.modal-wrap {
+    width: 100%;
+    max-width: 400px;
+    height: 100%;
+    max-height: 500px;
+    background-color: #fff;
+    border-radius: 10px;
+    border-top: 10px solid #3c6382;
+    border-bottom: 10px solid #3c6382;
+}
+
+.item {
+    width: calc(100% - 20px);
+    height: 50px;
+    display: flex;
+
+    padding: 10px;
+}
+
+@keyframes onFocusLabel {
+    0% {
+        top: 17px;
+        color: rgba(#3c6382, 0.5);
+    }
+
+    100% {
+        top: 0px;
+        color: rgba(#3c6382, 1);
+    }
+}
+
+@keyframes onFocusInput {
+    0% {
+        width: 0px;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+.input {
+    width: 100%;
+    height: 60px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    input:focus {
+        outline: none;
+
+        & ~ label {
+            animation-duration: 0.2s;
+            animation-name: onFocusLabel;
+            animation-fill-mode: both;
+        }
+        & ~ .highlight {
+            animation-duration: 0.2s;
+            animation-name: onFocusInput;
+            animation-fill-mode: both;
+        }
+    }
+
+    input:valid {
+        & ~ label {
+            top: 0px;
+            color: rgba(#3c6382, 1);
+        }
+        & ~ .highlight {
+            width: 100%;
+        }
+    }
+
+    input {
+        width: 100%;
+        height: 26px;
+        border: 0;
+        border-bottom: 2px solid rgba(#3c6382, 0.3);
+    }
+
+    label {
+        position: absolute;
+        top: 17px;
+        font-size: 14px;
+        color: rgba(#3c6382, 0.5);
+        font-family: "NSM";
+    }
+
+    .highlight {
+        position: absolute;
+        width: 0px;
+        bottom: 15px;
+        border-bottom: 2px solid rgba(#3c6382, 1);
+    }
+}
+
+.title {
+    width: calc(100% - 20px);
+    height: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10px;
+
+    h2 {
+        width: 100%;
+        color: rgba(#4a69bd, 0.96);
+    }
+}
+
+.button-box {
+    width: calc(100% - 20px);
+    height: calc(100% - 420px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    padding: 10px;
+
+    button {
+        width: 86px;
+        height: 40px;
+        border: 0px;
+        font-family: "NSB";
+        font-size: 16px;
+        color: #fff;
+        border-radius: 4px;
+        margin-left: 10px;
+
+        &.save {
+            background-color: #4a69bd;
+        }
+
+        &.cancel {
+            background-color: #e55039;
+        }
+    }
+}
