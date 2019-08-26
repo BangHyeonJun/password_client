@@ -24,6 +24,7 @@ const GET_PASSWORD_LIST = gql`
             site
             url
             id
+            password
             description
         }
     }
@@ -48,9 +49,6 @@ const Index = ({ history }) => {
         <div className={cx("wrap")}>
             <AddCard flag={flag} setFlag={setflag}></AddCard>
             <div className={cx("container")}>
-                <div>
-                    <input type="text" />
-                </div>
                 <div className={cx("card-wrap")}>
                     {data.getPasswordList.map(pData => {
                         return (

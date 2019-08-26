@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import gql from "graphql-tag";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 
 /* 이미지 태그 */
 import move from "../../../static/images/arrow.svg";
@@ -12,9 +14,34 @@ const cx = classNames.bind(styles);
 // 참고 : https://think360studio.com/how-card-based-design-is-changing-web-mobile-ui-design/
 const Card = ({ _id, site, url, id, password, description }) => {
     const color = ["#9b59b6", "#e74c3c", "#f39c12", "#2ecc71", "#3498db"];
+    const [ID, setID] = useState("*****************");
+    const [pwd, setPwd] = useState("*****************");
+
+    const handleOver = type => {
+        console.log(type);
+        switch (type) {
+            case "id":
+                setID(id);
+                break;
+            case "password":
+                setPwd(password);
+                break;
+        }
+    };
+
+    const handleOut = type => {
+        switch (type) {
+            case "id":
+                setID("*****************");
+                break;
+            case "password":
+                setPwd("*****************");
+                break;
+        }
+    };
 
     return (
-        <Link to={url} className={cx("link")}>
+        <a href={url} className={cx("link")} target="_blank">
             <div className={cx("wrap")}>
                 <div className={cx("container")}>
                     <div
@@ -39,7 +66,7 @@ const Card = ({ _id, site, url, id, password, description }) => {
                             <div className={cx("title-box")}>
                                 <h4>사이트</h4>
                             </div>
-                            <div className={cx("content-box")}>
+                            <div className={cx("contents-box")}>
                                 <h5>{site}</h5>
                             </div>
                         </div>
@@ -47,30 +74,46 @@ const Card = ({ _id, site, url, id, password, description }) => {
                             <div className={cx("title-box")}>
                                 <h4>아이디</h4>
                             </div>
-                            <div className={cx("content-box")}>
-                                <h5>{id}</h5>
+                            <div
+                                onMouseOver={e => {
+                                    handleOver("id");
+                                }}
+                                onMouseOut={e => {
+                                    handleOut("id");
+                                }}
+                                className={cx("contents-box")}
+                            >
+                                <h5>{ID}</h5>
                             </div>
                         </div>
                         <div className={cx("item")}>
                             <div className={cx("title-box")}>
                                 <h4>패스워드</h4>
                             </div>
-                            <div className={cx("content-box")}>
-                                <h5>{password}</h5>
+                            <div
+                                onMouseOver={e => {
+                                    handleOver("password");
+                                }}
+                                onMouseOut={e => {
+                                    handleOut("password");
+                                }}
+                                className={cx("contents-box")}
+                            >
+                                <h5>{pwd}</h5>
                             </div>
                         </div>
                         <div className={cx("item")}>
                             <div className={cx("title-box")}>
                                 <h4>메모</h4>
                             </div>
-                            <div className={cx("content-box")}>
+                            <div className={cx("contents-box")}>
                                 <h5>{description}</h5>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </Link>
+        </a>
     );
 };
 

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import gql from "graphql-tag";
+import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 
 /* 스타일 컴포넌트 */
 import classNames from "classnames/bind";
