@@ -32,9 +32,10 @@ const GET_PASSWORD_LIST = gql`
 
 const Index = ({ history }) => {
     const [flag, setflag] = useState(false);
-    const { data, loading, error } = useQuery(GET_PASSWORD_LIST);
+    const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST);
+
     if (loading) {
-        return <div>Loading...</div>;
+        return <Loading></Loading>;
     }
 
     if (error) {
@@ -47,7 +48,11 @@ const Index = ({ history }) => {
 
     return (
         <div className={cx("wrap")}>
-            <AddCard flag={flag} setFlag={setflag}></AddCard>
+            <AddCard
+                flag={flag}
+                setFlag={setflag}
+                cacheQuery={refetch}
+            ></AddCard>
             <div className={cx("container")}>
                 <div className={cx("card-wrap")}>
                     {data.getPasswordList.map(pData => {

@@ -47,26 +47,31 @@ const Login = ({ history }) => {
         return (
             <div className={cx("login-wrap")}>
                 <div className={cx("login-container")}>
+                    <div className={cx("login-title")}>
+                        <h3>LOG IN</h3>
+                    </div>
                     <div className={cx("login-box")}>
-                        <div>비밀번호</div>
-                        <div>
+                        <div className={cx("item-wrap")}>
                             <UserData
                                 type={"email"}
                                 name={"id"}
                                 value={email}
                                 onChange={setEmail}
+                                holder={"이메일"}
                             />
                         </div>
-                        <div>
+                        <div className={cx("item-wrap")}>
                             <UserData
                                 type={"password"}
                                 name={"password"}
                                 value={password}
+                                holder={"비밀번호"}
                                 onChange={setPassword}
                             />
                         </div>
-                        <div>
+                        <div className={cx("item-wrap")}>
                             <button
+                                className={cx("login-button")}
                                 onClick={() => {
                                     SIGNINQUERY();
                                 }}
@@ -74,10 +79,11 @@ const Login = ({ history }) => {
                                 로그인
                             </button>
                         </div>
-                        <div>
+                        <div className={cx("join-us-wrap")}>
+                            회원이 되고싶으세요?&nbsp;
                             <Link to={`/join`}>회원가입</Link>
                         </div>
-                        <div>비밀번호 찾기</div>
+                        {/* <div>비밀번호 찾기</div> */}
                     </div>
                 </div>
             </div>

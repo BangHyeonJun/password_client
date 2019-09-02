@@ -1,5 +1,5 @@
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { InMemoryCache, defaultDataIdFromObject } from "apollo-cache-inmemory";
 import { setContext } from "apollo-link-context";
 import { HttpLink } from "apollo-link-http"; // TODO : 안쓰면 지울것
 import { onError } from "apollo-link-error"; // TODO : 안쓰면 지울것
@@ -49,7 +49,9 @@ const authLink = setContext((_, { headers }) => {
 
 // 아오 시바 이거떄문에 이틀을 고생했네.... react-boost가 upload를 지원안하네...
 const client = new ApolloClient({
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({
+        dataIdFromObject: object => object._id // 캐싱질 시 _id를 인덱스로 캐싱해라 쒸뽤라마
+    }),
     link: authLink.concat(httpLink)
 });
 
