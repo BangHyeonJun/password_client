@@ -11,6 +11,7 @@ import plus from "../../static/images/plus.svg";
 import Loading from "../loading";
 import Card from "./list/Card";
 import AddCard from "./add/modal";
+import Search from "./search";
 
 /* 스타일 컴포넌트 */
 import classNames from "classnames/bind";
@@ -54,6 +55,9 @@ const Index = ({ history }) => {
                 cacheQuery={refetch}
             ></AddCard>
             <div className={cx("container")}>
+                <div className={cx("search-wrap")}>
+                    <Search></Search>
+                </div>
                 <div className={cx("card-wrap")}>
                     {data.getPasswordList.map(pData => {
                         return (
