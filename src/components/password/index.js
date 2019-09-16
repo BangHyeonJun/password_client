@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import gql from "graphql-tag";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 import { Link, Redirect } from "react-router-dom";
@@ -31,9 +31,23 @@ const GET_PASSWORD_LIST = gql`
     }
 `;
 
+const GET_PASSWORD_LIST_W_FILTER = gql`
+    query ($filter: String){
+        getPasswordWFilter(filter: $filter) {
+            _id
+            site
+            url
+            id
+            password
+            description
+        }
+    }
+`;
+
 const Index = ({ history }) => {
     const [flag, setflag] = useState(false);
-    const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST);
+    const [keyword, setKeword] = useState("");
+    const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST_W_FILTER);
 
     if (loading) {
         return <Loading></Loading>;
@@ -43,9 +57,18 @@ const Index = ({ history }) => {
         return <Redirect to="/login" />;
     }
 
+
     const handleAddCard = e => {
         setflag(true);
     };
+
+    const handleFilter = async e => {
+        e.preventDefault()
+        const val = e.target.value.toLowerCase();
+        // setKeword(val)
+        refetch({filter: val})
+
+    }
 
     return (
         <div className={cx("wrap")}>
@@ -56,10 +79,10 @@ const Index = ({ history }) => {
             ></AddCard>
             <div className={cx("container")}>
                 <div className={cx("search-wrap")}>
-                    <Search></Search>
+                    <Search handleFilter={handleFilter}></Search>
                 </div>
                 <div className={cx("card-wrap")}>
-                    {data.getPasswordList.map(pData => {
+                    {data.getPasswordWFilter.map(pData => {
                         return (
                             <Card
                                 key={pData._id}

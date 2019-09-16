@@ -42,6 +42,11 @@ const Card = ({ _id, site, url, id, password, description }) => {
         }
     };
 
+    const handleRemove = (e) => {
+        console.log("test");
+        e.preventDefault()
+    }
+
     return (
         <a href={url} className={cx("link")} target="_blank">
             <div className={cx("wrap")}>
@@ -112,7 +117,7 @@ const Card = ({ _id, site, url, id, password, description }) => {
                                 <h5>{description}</h5>
                             </div>
                         </div>
-                        <div className={cx("button-container")}>
+                        <div className={cx("button-container")} onClick={handleRemove}>
                             <button className={cx("edit")}>
                                 <img src={edit}></img>
                             </button>

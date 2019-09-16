@@ -5,8 +5,8 @@ import classNames from "classnames/bind";
 import styles from "./index.module.scss";
 const cx = classNames.bind(styles);
 
-function Index() {
-    return <input className={cx("search")} type="text"></input>;
+function Index({handleFilter}) {
+    return <input className={cx("search")} type="text" onChange={handleFilter}></input>;
 }
 
 export default Index;
