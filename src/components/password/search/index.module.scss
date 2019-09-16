@@ -7,15 +7,16 @@
     border: 0px;
     background-color: rgba($color: #6a6c75, $alpha: 0.8);
     position: relative;
+    color: #dfdfdf;
 
-    &::after {
-        content: "";
-        background-image: url("../../../static/images/search.svg");
-        width: 100px;
-        height: 100px;
-        position: absolute;
-        display: inline-block;
-        top: 0px;
-        left: 0px;
-    }
+    // &:: {
+    //     content: "";
+    //     background-image: url("../../../static/images/search.svg");
+    //     width: 100px;
+    //     height: 100px;
+    //     position: absolute;
+    //     display: inline-block;
+    //     top: 0px;
+    //     left: 0px;
+    // }
 }

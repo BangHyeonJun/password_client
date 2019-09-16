@@ -5,6 +5,8 @@ import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 
 /* 이미지 태그 */
 import move from "../../../static/images/arrow.svg";
+import edit from "../../../static/images/edit.svg";
+import trash from "../../../static/images/trash.svg";
 
 /* 스타일 컴포넌트 */
 import classNames from "classnames/bind";
@@ -109,6 +111,14 @@ const Card = ({ _id, site, url, id, password, description }) => {
                             <div className={cx("contents-box")}>
                                 <h5>{description}</h5>
                             </div>
+                        </div>
+                        <div className={cx("button-container")}>
+                            <button className={cx("edit")}>
+                                <img src={edit}></img>
+                            </button>
+                            <button className={cx("remove")}>
+                                <img src={trash}></img>
+                            </button>
                         </div>
                     </div>
                 </div>
