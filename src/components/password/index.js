@@ -32,7 +32,7 @@ const GET_PASSWORD_LIST = gql`
 `;
 
 const GET_PASSWORD_LIST_W_FILTER = gql`
-    query ($filter: String){
+    query($filter: String) {
         getPasswordWFilter(filter: $filter) {
             _id
             site
@@ -47,7 +47,8 @@ const GET_PASSWORD_LIST_W_FILTER = gql`
 const Index = ({ history }) => {
     const [flag, setflag] = useState(false);
     const [keyword, setKeword] = useState("");
-    const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST_W_FILTER);
+    const [item, setItem] = useState([]);
+    const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST);
 
     if (loading) {
         return <Loading></Loading>;
@@ -57,18 +58,32 @@ const Index = ({ history }) => {
         return <Redirect to="/login" />;
     }
 
-
     const handleAddCard = e => {
         setflag(true);
     };
 
     const handleFilter = async e => {
-        e.preventDefault()
+        e.preventDefault();
         const val = e.target.value.toLowerCase();
-        // setKeword(val)
-        refetch({filter: val})
 
-    }
+        setItem(
+            data.getPasswordList.filter(item => {
+                let site = item.site.toLowerCase();
+                let url = item.url.toLowerCase();
+                let id = item.id.toLowerCase();
+                let description = item.description.toLowerCase();
+
+                if (
+                    site.indexOf(val) > -1 ||
+                    url.indexOf(val) > -1 ||
+                    id.indexOf(val) > -1 ||
+                    description.indexOf(val) > -1
+                ) {
+                    return item;
+                }
+            })
+        );
+    };
 
     return (
         <div className={cx("wrap")}>
@@ -82,7 +97,7 @@ const Index = ({ history }) => {
                     <Search handleFilter={handleFilter}></Search>
                 </div>
                 <div className={cx("card-wrap")}>
-                    {data.getPasswordWFilter.map(pData => {
+                    {item.map(pData => {
                         return (
                             <Card
                                 key={pData._id}
