@@ -50,6 +50,12 @@ const Index = ({ history }) => {
     const [item, setItem] = useState([]);
     const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST);
 
+    useEffect(() => {
+        if (data.getPasswordList) {
+            setItem(data.getPasswordList);
+        }
+    }, [data.getPasswordList]);
+
     if (loading) {
         return <Loading></Loading>;
     }
