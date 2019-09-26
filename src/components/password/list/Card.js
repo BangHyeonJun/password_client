@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import gql from "graphql-tag";
 import { useQuery, useMutation, useLazyQuery } from "@apollo/react-hooks";
 
+/* 사용자 컴포넌트 */
+import Loading from "../../loading";
+
 /* 이미지 태그 */
 import move from "../../../static/images/arrow.svg";
 import edit from "../../../static/images/edit.svg";
@@ -13,11 +16,28 @@ import classNames from "classnames/bind";
 import styles from "./Card.module.scss";
 const cx = classNames.bind(styles);
 
+const DELETE_PASSWORD = gql`
+    mutation($pId: String!) {
+        deletePassword(pId: $pId)
+    }
+`;
+
 // 참고 : https://think360studio.com/how-card-based-design-is-changing-web-mobile-ui-design/
-const Card = ({ _id, site, url, id, password, description }) => {
+const Card = ({ _id, site, url, id, password, description, cacheQuery }) => {
     const color = ["#9b59b6", "#e74c3c", "#f39c12", "#2ecc71", "#3498db"];
     const [ID, setID] = useState("*****************");
     const [pwd, setPwd] = useState("*****************");
+
+    const [
+        DELETEPASSWORDMUTATION,
+        { loading: mutationLoading, error: mutationError }
+    ] = useMutation(DELETE_PASSWORD, {
+        onCompleted(data) {
+            cacheQuery();
+        }
+    });
+
+    if (mutationLoading) return <Loading></Loading>;
 
     const handleOver = type => {
         console.log(type);
@@ -42,10 +62,16 @@ const Card = ({ _id, site, url, id, password, description }) => {
         }
     };
 
-    const handleRemove = (e) => {
-        console.log("test");
-        e.preventDefault()
-    }
+    const handleRemove = e => {
+        e.preventDefault();
+
+        console.log(_id);
+        DELETEPASSWORDMUTATION({
+            variables: {
+                pId: _id
+            }
+        });
+    };
 
     return (
         <a href={url} className={cx("link")} target="_blank">
@@ -117,11 +143,14 @@ const Card = ({ _id, site, url, id, password, description }) => {
                                 <h5>{description}</h5>
                             </div>
                         </div>
-                        <div className={cx("button-container")} onClick={handleRemove}>
-                            <button className={cx("edit")}>
+                        <div className={cx("button-container")}>
+                            {/* <button className={cx("edit")}>
                                 <img src={edit}></img>
-                            </button>
-                            <button className={cx("remove")}>
+                            </button> */}
+                            <button
+                                className={cx("remove")}
+                                onClick={handleRemove}
+                            >
                                 <img src={trash}></img>
                             </button>
                         </div>

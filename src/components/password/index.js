@@ -46,6 +46,7 @@ const GET_PASSWORD_LIST_W_FILTER = gql`
 
 const Index = ({ history }) => {
     const [flag, setflag] = useState(false);
+    const [lodingFlag, setLoadingFlag] = useState(false);
     const [keyword, setKeword] = useState("");
     const [item, setItem] = useState([]);
     const { data, loading, error, refetch } = useQuery(GET_PASSWORD_LIST);
@@ -113,6 +114,7 @@ const Index = ({ history }) => {
                                 id={pData.id}
                                 password={pData.password}
                                 description={pData.description}
+                                cacheQuery={refetch}
                             />
                         );
                     })}
